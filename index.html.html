@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stanford Mathematics Science Conference — Registration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8C1515;
+            --primary-dark: #6F1111;
+            --secondary: #175E54;
+            --accent: #B83A4B;
+            --bg: #F9F9F7;
+            --surface: #FFFFFF;
+            --text: #2E2D2B;
+            --text-light: #6E6E6E;
+            --border: #E5E5E0;
+            --shadow: 0 4px 24px rgba(0,0,0,0.06);
+            --shadow-lg: 0 12px 48px rgba(0,0,0,0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Hero Header */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 80px 20px 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        .hero-wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            line-height: 0;
+        }
+
+        .hero-wave svg {
+            display: block;
+            width: 100%;
+            height: 60px;
+        }
+
+        /* Form Container */
+        .container {
+            max-width: 900px;
+            margin: -40px auto 80px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .form-card {
+            background: var(--surface);
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            padding: 48px;
+            border: 1px solid var(--border);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 32px;
+            border-bottom: 2px solid var(--bg);
+        }
+
+        .form-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .form-header p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Section Styling */
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--bg);
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .section-title h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .section-title span {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            font-weight: 400;
+            margin-left: auto;
+        }
+
+        /* Grid Layout */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text);
+            letter-spacing: 0.3px;
+        }
+
+        .required::after {
+            content: ' *';
+            color: var(--accent);
+        }
+
+        input, select, textarea {
+            padding: 14px 16px;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text);
+            background: var(--surface);
+            transition: all 0.2s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(140, 21, 21, 0.08);
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: #B0B0B0;
+        }
+
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236E6E6E' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 40px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* File Upload */
+        .file-upload {
+            border: 2px dashed var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: var(--bg);
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary);
+            background: rgba(140, 21, 21, 0.02);
+        }
+
+        .file-upload input {
+            display: none;
+        }
+
+        .file-upload-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+
+        .file-upload p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 4px;
+        }
+
+        .file-upload small {
+            font-size: 0.75rem;
+            color: #999;
+        }
+
+        /* Checkbox */
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            font-weight: 400;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        .checkbox-group a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .checkbox-group a:hover {
+            text-decoration: underline;
+        }
+
+        /* Submit Button */
+        .submit-section {
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 2px solid var(--bg);
+            text-align: center;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 16px 48px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(140, 21, 21, 0.3);
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(140, 21, 21, 0.4);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .submit-note {
+            margin-top: 16px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Success Message (hidden by default) */
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, #175E54, #1A7A6D);
+            color: white;
+            padding: 48px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .success-message.active {
+            display: block;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .success-message h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .success-message p {
+            opacity: 0.9;
+            max-width: 500px;
+            margin: 0 auto 24px;
+        }
+
+        .btn-back {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 12px 32px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-back:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .form-card {
+                padding: 28px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title span {
+                display: none;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-card {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <div class="badge">Annual Academic Gathering</div>
+            <h1>Stanford Mathematics Science Conference</h1>
+            <p>Join leading mathematicians, researchers, and scholars for three days of groundbreaking discourse, collaboration, and innovation.</p>
+        </div>
+        <div class="hero-wave">
+            <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+                <path fill="#F9F9F7" d="M0,64L48,69.3C96,75,192,85,288,80C384,75,480,53,576,48C672,43,768,53,864,64C960,75,1056,85,1152,80C1248,75,1344,53,1392,42.7L1440,32L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z"></path>
+            </svg>
+        </div>
+    </header>
+
+    <!-- Main Form -->
+    <main class="container">
+        <div class="form-card" id="registrationForm">
+            <div class="form-header">
+                <h2>Conference Registration</h2>
+                <p>Please complete all sections below. Fields marked with <span style="color: var(--accent);">*</span> are required.</p>
+            </div>
+
+            <form id="confForm" onsubmit="handleSubmit(event)">
+
+                <!-- Personal Information -->
+                <div class="section">
+                    <div class="section-title">
+                        <div class="section-icon">👤</div>
+                        <h3>Personal Information</h3>
+                        <span>Step 1 of 4</span>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="firstName" class="required">First Name</label>
+                            <input type="text" id="firstName" name="firstName" placeholder="e.g. John" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName" class="required">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" placeholder="e.g. Smith" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dob">Date of Birth</label>
+                            <input type="date" id="dob" name="dob">
+                        </div>
+                        <div class="form-group">
+                            <label for="nationality">Nationality</label>
+                            <input type="text" id="nationality" name="nationality" placeholder="e.g. United States">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="address">Mailing Address</label>
+                            <input type="text" id="address" name="address" placeholder="Street address, apartment, suite, etc.">
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" id="city" name="city" placeholder="e.g. Palo Alto">
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <input type="text" id="country" name="country" placeholder="e.g. United States">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="section">
+                    <div class="section-title">
+                        <div class="section-icon">📧</div>
+                        <h3>Contact Information</h3>
+                        <span>Step 2 of 4</span>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="email" class="required">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="john.smith@university.edu" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="required">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="altEmail">Alternative Email</label>
+                            <input type="email" id="altEmail" name="altEmail" placeholder="Secondary contact email">
+                        </div>
+                        <div class="form-group">
+                            <label for="linkedin">LinkedIn Profile</label>
+                            <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/...">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Academic Information -->
+                <div class="section">
+                    <div class="section-title">
+                        <div class="section-icon">🎓</div>
+                        <h3>Academic Information</h3>
+                        <span>Step 3 of 4</span>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="institution" class="required">University / Institution</label>
+                            <input type="text" id="institution" name="institution" placeholder="e.g. Stanford University" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="department">Department / Faculty</label>
+                            <input type="text" id="department" name="department" placeholder="e.g. Department of Mathematics">
+                        </div>
+                        <div class="form-group">
+                            <label for="degree" class="required">Current Degree Level</label>
+                            <select id="degree" name="degree" required>
+                                <option value="" disabled selected>Select your degree level</option>
+                                <option value="undergraduate">Undergraduate Student</option>
+                                <option value="masters">Master's Student</option>
+                                <option value="phd">Ph.D. Candidate</option>
+                                <option value="postdoc">Postdoctoral Researcher</option>
+                                <option value="professor">Professor / Faculty</option>
+                                <option value="researcher">Research Scientist</option>
+                                <option value="industry">Industry Professional</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="field">Field of Study / Research</label>
+                            <input type="text" id="field" name="field" placeholder="e.g. Algebraic Geometry">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="research">Brief Research Summary</label>
+                            <textarea id="research" name="research" placeholder="Describe your current research interests and projects (max 300 words)"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education & Certificates -->
+                <div class="section">
+                    <div class="section-title">
+                        <div class="section-icon">📜</div>
+                        <h3>Education & Certificates</h3>
+                        <span>Step 4 of 4</span>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label for="education">Highest Completed Education</label>
+                            <select id="education" name="education">
+                                <option value="" disabled selected>Select highest degree earned</option>
+                                <option value="highschool">High School Diploma</option>
+                                <option value="bachelor">Bachelor's Degree</option>
+                                <option value="master">Master's Degree</option>
+                                <option value="phd">Ph.D. / Doctorate</option>
+                                <option value="postdoc">Postdoctoral Studies</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="gradYear">Graduation Year</label>
+                            <input type="number" id="gradYear" name="gradYear" placeholder="e.g. 2024" min="1950" max="2030">
+                        </div>
+                        <div class="form-group">
+                            <label for="gpa">GPA / Academic Standing</label>
+                            <input type="text" id="gpa" name="gpa" placeholder="e.g. 3.85 / 4.0">
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Certificate / Transcript Upload</label>
+                            <div class="file-upload" onclick="document.getElementById('certificate').click()">
+                                <input type="file" id="certificate" name="certificate" accept=".pdf,.jpg,.jpeg,.png">
+                                <div class="file-upload-icon">📎</div>
+                                <p>Click to upload your certificate or transcript</p>
+                                <small>Supported formats: PDF, JPG, PNG (Max 10MB)</small>
+                            </div>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="awards">Awards, Honors & Publications</label>
+                            <textarea id="awards" name="awards" placeholder="List any relevant academic awards, honors, or published papers (optional)"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terms -->
+                <div class="section">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">I confirm that all information provided is accurate and complete. I agree to the <a href="#">Conference Terms & Conditions</a> and <a href="#">Privacy Policy</a>. I understand that providing false information may result in disqualification from the conference.</label>
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="submit-section">
+                    <button type="submit" class="btn-submit">Submit Registration →</button>
+                    <p class="submit-note">You will receive a confirmation email within 24 hours.</p>
+                </div>
+            </form>
+        </div>
+
+        <!-- Success Message -->
+        <div class="success-message" id="successMessage">
+            <div class="success-icon">✅</div>
+            <h2>Registration Submitted Successfully!</h2>
+            <p>Thank you for registering for the Stanford Mathematics Science Conference. We have sent a confirmation email to your provided address with further instructions.</p>
+            <button class="btn-back" onclick="resetForm()">Submit Another Response</button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 Stanford Mathematics Science Conference. All rights reserved.</p>
+        <p style="margin-top: 8px;">For inquiries, contact <a href="mailto:conference@stanford.math.edu">conference@stanford.math.edu</a></p>
+    </footer>
+
+    <script>
+        // File upload display
+        document.getElementById('certificate').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const uploadDiv = document.querySelector('.file-upload');
+                uploadDiv.innerHTML = `
+                    <div class="file-upload-icon">📄</div>
+                    <p style="color: var(--primary); font-weight: 600;">${file.name}</p>
+                    <small>Click to change file</small>
+                `;
+            }
+        });
+
+        // Form submission handler
+        function handleSubmit(e) {
+            e.preventDefault();
+
+            // Basic validation
+            const form = e.target;
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            // Simulate submission
+            const btn = document.querySelector('.btn-submit');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = 'Submitting...';
+            btn.disabled = true;
+            btn.style.opacity = '0.7';
+
+            setTimeout(() => {
+                document.getElementById('registrationForm').style.display = 'none';
+                document.getElementById('successMessage').classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                // Reset button
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                btn.style.opacity = '1';
+            }, 1500);
+        }
+
+        function resetForm() {
+            document.getElementById('confForm').reset();
+            document.getElementById('registrationForm').style.display = 'block';
+            document.getElementById('successMessage').classList.remove('active');
+
+            // Reset file upload UI
+            const uploadDiv = document.querySelector('.file-upload');
+            uploadDiv.innerHTML = `
+                <input type="file" id="certificate" name="certificate" accept=".pdf,.jpg,.jpeg,.png">
+                <div class="file-upload-icon">📎</div>
+                <p>Click to upload your certificate or transcript</p>
+                <small>Supported formats: PDF, JPG, PNG (Max 10MB)</small>
+            `;
+
+            // Re-attach listener
+            document.getElementById('certificate').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    uploadDiv.innerHTML = `
+                        <div class="file-upload-icon">📄</div>
+                        <p style="color: var(--primary); font-weight: 600;">${file.name}</p>
+                        <small>Click to change file</small>
+                    `;
+                }
+            });
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Smooth input focus effects
+        document.querySelectorAll('input, select, textarea').forEach(field => {
+            field.addEventListener('focus', function() {
+                this.closest('.form-group')?.classList.add('focused');
+            });
+            field.addEventListener('blur', function() {
+                this.closest('.form-group')?.classList.remove('focused');
+            });
+        });
+    </script>
+
+</body>
+</html>
